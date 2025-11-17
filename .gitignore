@@ -1,5 +1,5 @@
 /coverage-reports
 /node_modules
 /test-results
-/package-lock.json
 /monocart-report
+/coverage

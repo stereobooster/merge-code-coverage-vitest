@@ -1,10 +1,7 @@
-import path from 'path';
+// import path from 'path';
 import { CoverageReport } from 'monocart-coverage-reports';
 
-const inputDir = [
-    './coverage-reports/unit/raw',
-    './coverage-reports/e2e/raw'
-];
+const inputDir = ['./coverage-reports/unit/raw', './coverage-reports/e2e/raw'];
 
 const coverageOptions = {
     name: 'Merged Coverage Report',
@@ -22,36 +19,34 @@ const coverageOptions = {
     // },
 
     sourcePath: (filePath, info) => {
-        // Unify the file path for the same files
-        // For example, the file index.js has different paths:
-        // unit: unit-dist/src/index.js
-        // e2e: e2e-dist/src/index.js
-        // return filePath.replace("unit-dist/", "").replace("e2e-dist/", "")
+    // Unify the file path for the same files
+    // For example, the file index.js has different paths:
+    // unit: unit-dist/src/index.js
+    // e2e: e2e-dist/src/index.js
+    // return filePath.replace("unit-dist/", "").replace("e2e-dist/", "")
 
         // console.log(filePath, info);
 
         // add src dir
         if (!filePath.includes('/') && info.distFile) {
-            const dir = path.dirname(info.distFile).replace('localhost:5173/', '');
-            return `${dir}/${filePath}`;
+            // const dir = path.dirname(info.distFile).replace("localhost:5173/", "");
+            // return `${dir}/${filePath}`;
+            return info.distFile.replace('localhost-5173/', '');
         }
 
         return filePath;
     },
 
-    reports: [
-        ['v8'],
-        ['console-details']
-    ],
+    reports: [['v8'], ['console-details']],
 
     onEnd: () => {
-        // remove the raw files if it useless
-        // inputDir.forEach((p) => {
-        //     fs.rmSync(p, {
-        //         recursive: true,
-        //         force: true
-        //     });
-        // });
+    // remove the raw files if it useless
+    // inputDir.forEach((p) => {
+    //     fs.rmSync(p, {
+    //         recursive: true,
+    //         force: true
+    //     });
+    // });
     }
 };
 

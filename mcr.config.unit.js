@@ -5,11 +5,7 @@ export default {
     name: 'Unit Coverage Report',
     outputDir: './coverage-reports/unit',
 
-    reports: [
-        'console-details',
-        'v8',
-        'raw'
-    ],
+    reports: process.env.CI ? ['raw'] : ['raw', 'console-details', 'v8'],
 
     entryFilter: {
         '**/src/**': true
